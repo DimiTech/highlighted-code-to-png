@@ -6,10 +6,32 @@
     <title>Export Highlighted Code to PNG</title>
 
     <!-- Change the theme here -->
-    <link rel="stylesheet" href="./libs/highlight.js/11.3.1/styles/atom-one-dark.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+      integrity="sha512-Jk4AqjWsdSzSWCSuQTfYRIF84Rq/eV0G2+tu07byYwHcbTGfdmLrHjUSwvzp5HvbiqK4ibmNwdcG49Y5RGYPTg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
 
-    <script src="./libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <script src="./libs/html2canvas/html2canvas.min.js"></script>
+    <!-- Highlight.js -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+      integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- html2canvas -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
       body {
@@ -68,16 +90,16 @@
       })
 
       // Function to export the highlighted code to PNG
-      function exportToPNG() {
+      async function exportToPNG() {
         const codeContainer = document.querySelector('.code-container')
 
-        html2canvas(codeContainer, {backgroundColor: null}).then(canvas => {
-          const imageData = canvas.toDataURL('image/png')
-          const link = document.createElement('a')
-          link.href = imageData
-          link.download = 'code_snippet.png'
-          link.click()
-        })
+        const canvas = await html2canvas(codeContainer, {backgroundColor: null})
+        const imageData = canvas.toDataURL('image/png')
+
+        const link = document.createElement('a')
+        link.href = imageData
+        link.download = 'code_snippet.png'
+        link.click()
       }
     </script>
   </body>
